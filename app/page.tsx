@@ -22,6 +22,8 @@ import {
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import VehicleShowcase from "@/components/vehicle-showcase";
+import VehicleModel from "@/components/moped-scene";
+import { WorldMap } from "@/components/ui/world-map";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -96,16 +98,18 @@ const diagramY = useTransform(
       <main>
         <section
           ref={sectionRef}
-          className="relative h-[600vh] bg-primary text-primary-foreground"
+          className="relative h-[2600vh] bg-primary text-primary-foreground"
         >
           <div className="sticky top-0 h-screen overflow-hidden">
             <Header dark />
+
+            <VehicleModel/>
 
             {/* -------------------------------- */}
             {/* PHASE 1 + 2 — HERO */}
             {/* -------------------------------- */}
 
-            <motion.div
+            {/* <motion.div
               style={{
                 x: headlineX,
                 opacity: headlineOpacity,
@@ -143,13 +147,13 @@ const diagramY = useTransform(
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* -------------------------------- */}
             {/* ZAP TRANSITION */}
             {/* -------------------------------- */}
 
-            <motion.div
+            {/* <motion.div
               style={{
                 x: zapX,
                 scale: zapScale,
@@ -174,13 +178,13 @@ const diagramY = useTransform(
                   size={48}
                 />
               </motion.div>
-            </motion.div>
+            </motion.div> */}
             
             {/* -------------------------------- */}
             {/* PHASE 3 — VEHICLE SHOWCASE */}
             {/* -------------------------------- */}
 
-            <motion.div
+            {/* <motion.div
               style={{
                 opacity: diagramOpacity,
                 scale: diagramScale,
@@ -189,10 +193,29 @@ const diagramY = useTransform(
               className="absolute inset-0 z-30"
             >
               <VehicleShowcase scrollProgress={scrollYProgress} />
-            </motion.div>
+            </motion.div> */}
 
           </div>
         </section>
+
+              <WorldMap
+        dots={[
+          {
+            start: {
+              lat: 46.4519,
+              lng: -12.0418,
+            }, // Alaska (Fairbanks)
+            end: {
+              lat: 41.4519,
+              lng: -17.9,
+            }, // Los Angeles
+          },
+          {
+            start: { lat: -44.4834, lng: -28.3936 }, // Alaska (Fairbanks)
+            end: { lat: 12.9117, lng: 77.6433 }, // Brazil (Brasília)
+          },
+        ]}
+      />
 
         <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
           <SectionHeading
