@@ -41,7 +41,7 @@ export function WorldMap({
     end: { x: number; y: number }
   ) => {
     const midX = (start.x + end.x) / 2;
-    const midY = Math.min(start.y, end.y) - 50;
+    const midY = Math.min(start.y, end.y) - 30;
     return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
   };
 
@@ -55,6 +55,25 @@ export function WorldMap({
         width="1056"
         draggable={false}
       />
+
+{dots.map((dot, i) => {
+  const { x, y } = projectPoint(dot.end.lat, dot.end.lng);
+
+  return (
+    <div
+      key={i}
+      className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10px] text-black z-10"
+      style={{
+        left: `${(x / 800) * 100}%`,
+        top: `${(y / 390) * 100}%`,
+      }}
+    >
+      {dot.end.label}
+    </div>
+  );
+})}
+
+
       <svg
         ref={svgRef}
         viewBox="0 0 800 400"

@@ -198,25 +198,6 @@ const diagramY = useTransform(
           </div>
         </section>
 
-              <WorldMap
-        dots={[
-          {
-            start: {
-              lat: 46.4519,
-              lng: -12.0418,
-            }, // Alaska (Fairbanks)
-            end: {
-              lat: 41.4519,
-              lng: -17.9,
-            }, // Los Angeles
-          },
-          {
-            start: { lat: -44.4834, lng: -28.3936 }, // Alaska (Fairbanks)
-            end: { lat: 12.9117, lng: 77.6433 }, // Brazil (Brasília)
-          },
-        ]}
-      />
-
         <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
           <SectionHeading
             eyebrow="What we do"
@@ -303,7 +284,37 @@ const diagramY = useTransform(
               Explore the network <ArrowUpRight size={17} />
             </Link>
           </div>
-          <NetworkVisual />
+          {/* <NetworkVisual /> */}
+                  <div className="w-[600px] h-[300px] overflow-clip">
+          <WorldMap
+            lineColor="#FF5634"
+            dots={[
+              {
+                start: {
+                  lat: 46.4519,
+                  lng: -12.0418,
+                }, // Alaska (Fairbanks)
+                end: {
+                  lat: 41.4519,
+                  lng: -17.9,
+                  label: "Haryana"
+                }, // Los Angeles
+              },
+              {
+                start: { lat: -44.4834, lng: -28.3936 },
+                end: { lat: -35.9117, lng: -2.6433, label: "Hyderabad" },
+              },
+              {
+                end: { lat: 46.4519, lng: -12.0418, label: "Delhi" },
+                start: { lat: -35.9117, lng: -2.6433 },
+              },
+              {
+                start: { lat: 41.4519, lng: -17.9 },
+                end: { lat: -44.4834, lng: -28.3936, label: "Bangalore" },
+              }
+            ]}
+          />
+        </div>
         </section>
         <section className="bg-muted px-6 py-24 lg:px-10">
           <div className="mx-auto max-w-7xl">
