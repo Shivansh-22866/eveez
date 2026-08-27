@@ -14,7 +14,7 @@ function Vehicle() {
   const { scrollYProgress } = useScroll();
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    progress.current = 1.3*value;
+    progress.current = Math.min(value / 0.55, 1);
   });
 
   useFrame(() => {
@@ -77,7 +77,7 @@ export default function VehicleModel() {
   const carouselOpacity = useTransform(
     scrollYProgress,
     [0, 0.2, 0.6, 1],
-    [0, 0.4, 0.6, 1],
+    [0, 1, 1, 1],
     {clamp: true}
   )
 
@@ -87,6 +87,35 @@ export default function VehicleModel() {
     [1, 0, 0],
     {clamp: true}
   )
+
+  const features = [
+  {
+    title: "Premium Design",
+    description: "A sleek and aerodynamic exterior",
+    position: { top: "20%", right: "12%" },
+  },
+  {
+    title: "Long Range",
+    description: "Go further on every charge",
+    position: { top: "38%", right: "4%" },
+  },
+  {
+    title: "Smart Technology",
+    description: "Connected features built around you",
+    position: { top: "58%", right: "8%" },
+  },
+  {
+    title: "Fast Charging",
+    description: "Spend less time charging",
+    position: { top: "72%", left: "8%" },
+  },
+  {
+    title: "Advanced Safety",
+    description: "Protection wherever you go",
+    position: { top: "32%", left: "5%" },
+  },
+];
+
 
   return (
     <div
@@ -160,18 +189,65 @@ export default function VehicleModel() {
           />
         </Canvas>
 
-          <motion.div
-            style={{
+        <motion.div
+          style={{
             position: "absolute",
             zIndex: 20,
             top: "50%",
-            right: "10%",
-            height: "100%",
-            pointerEvents: "auto",
+            right: "8%",
+            transform: "translateY(-50%)",
+            pointerEvents: "none",
+            color: "white",
             opacity: logoOpacity,
-          }}>
-            <Image src={"https://www.eveez.in/image/evv.png"} alt="Logo" width={200} height={200} />
-          </motion.div>
+            textAlign: "right",
+            maxWidth: "520px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "clamp(1.5rem, 3vw, 3.5rem)",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              letterSpacing: "-0.05em",
+            }}
+          >
+            <div>Worried about</div>
+            <div>Rising Petrol</div>
+            <div>Prices?</div>
+          </div>
+
+          <div
+            style={{
+              marginTop: "1.5rem",
+              fontSize: "clamp(1rem, 1.5vw, 1.5rem)",
+              fontWeight: 600,
+              lineHeight: 1.2,
+              letterSpacing: "0.02em",
+              textTransform: "uppercase",
+            }}
+          >
+            Introducing All-Inclusive
+            <br />
+            <span style={{ color: "#15110d" }}>eBike Subscriptions</span>
+          </div>
+
+          <div
+            style={{
+              display: "inline-block",
+              marginTop: "2rem",
+              padding: "0.9rem 1.8rem",
+              borderRadius: "999px",
+              background: "#15110d",
+              color: "#fff",
+              fontSize: "clamp(0.9rem, 1.2vw, 1.2rem)",
+              fontWeight: 700,
+              letterSpacing: "0.02em",
+            }}
+          >
+            Start Saving Now →
+          </div>
+        </motion.div>
+
 
           <motion.div
           style={{
