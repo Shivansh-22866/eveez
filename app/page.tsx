@@ -2,96 +2,25 @@
 
 import Link from "next/link";
 import {
-  ArrowDownRight,
   ArrowUpRight,
   BatteryCharging,
   BriefcaseBusiness,
   CircleDollarSign,
   Route,
-  Zap,
 } from "lucide-react";
 import {
-  CTA,
   Footer,
   Header,
   Metrics,
-  NetworkVisual,
   Pill,
   SectionHeading,
 } from "@/components/site";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import VehicleShowcase from "@/components/vehicle-showcase";
 import VehicleModel from "@/components/moped-scene";
 import { WorldMap } from "@/components/ui/world-map";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-
-// HEADLINE
-const headlineX = useTransform(
-  scrollYProgress,
-  [0, 0.12, 0.32],
-  ["0%", "0%", "-120%"]
-);
-
-const headlineOpacity = useTransform(
-  scrollYProgress,
-  [0.12, 0.38],
-  [1, 0]
-);
-
-// ZAP
-const zapX = useTransform(
-  scrollYProgress,
-  [0.28, 0.3, 0.4, 0.5, 1],
-  ["35vw", "35vw", "0vw", "0vw", "0vw"],
-  { clamp: true }
-);
-
-const zapScale = useTransform(
-  scrollYProgress,
-  [0.28, 0.3, 0.4, 0.5, 0.6, 1],
-  [1, 1, 7, 15, 15, 15],
-  { clamp: true }
-);
-
-const zapOpacity = useTransform(
-  scrollYProgress,
-  [0.28, 0.3, 0.4, 0.6, 1],
-  [1, 1, 0, 0, 0],
-  { clamp: true }
-);
-
-// VEHICLE
-const diagramOpacity = useTransform(
-  scrollYProgress,
-  [0.5, 0.64, 0.92, 0.97],
-  [0, 1, 1, 0],
-  { clamp: true }
-);
-
-const diagramScale = useTransform(
-  scrollYProgress,
-  [0.55, 0.64],
-  [0.8, 1],
-  { clamp: true }
-);
-
-const diagramY = useTransform(
-  scrollYProgress,
-  [0.5, 0.64],
-  [100, 0],
-  { clamp: true }
-);
-
-
-
   
   return (
     <>
@@ -104,96 +33,6 @@ const diagramY = useTransform(
             <Header dark />
 
             <VehicleModel/>
-
-            {/* -------------------------------- */}
-            {/* PHASE 1 + 2 — HERO */}
-            {/* -------------------------------- */}
-
-            {/* <motion.div
-              style={{
-                x: headlineX,
-                opacity: headlineOpacity,
-              }}
-              className="absolute inset-0 z-10 flex items-end"
-            >
-              <div className="mx-auto w-full max-w-7xl px-6 pb-64 lg:px-10">
-                <div className="max-w-5xl">
-                  <p className="eyebrow mb-6">
-                    Electric mobility / India / 2026
-                  </p>
-
-                  <h1 className="text-balance text-[clamp(4.5rem,7vw,8rem)] font-black leading-[0.78] tracking-[-0.09em]">
-                    Smart Electric
-                    <br />
-                    <span className="text-foreground">
-                      Mobility.
-                    </span>
-                  </h1>
-
-                  <div className="mt-12 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-                    <p className="max-w-sm text-lg leading-7 text-primary-foreground/80">
-                      Eveez makes electric mobility work for everyone —
-                      riders, entrepreneurs and the businesses that keep
-                      India moving.
-                    </p>
-
-                    <a
-                      href="/about"
-                      className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground"
-                    >
-                      Discover Eveez
-                      <ArrowDownRight size={17} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </motion.div> */}
-
-            {/* -------------------------------- */}
-            {/* ZAP TRANSITION */}
-            {/* -------------------------------- */}
-
-            {/* <motion.div
-              style={{
-                x: zapX,
-                scale: zapScale,
-                opacity: zapOpacity,
-              }}
-              className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary-foreground/30"
-            >
-              <div className="absolute inset-10 rounded-full border border-primary-foreground/30" />
-
-              <motion.div
-                style={{
-                  rotate: useTransform(
-                    scrollYProgress,
-                    [0.35, 0.7],
-                    [0, 180]
-                  ),
-                }}
-                className="absolute inset-0"
-              >
-                <Zap
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-foreground"
-                  size={48}
-                />
-              </motion.div>
-            </motion.div> */}
-            
-            {/* -------------------------------- */}
-            {/* PHASE 3 — VEHICLE SHOWCASE */}
-            {/* -------------------------------- */}
-
-            {/* <motion.div
-              style={{
-                opacity: diagramOpacity,
-                scale: diagramScale,
-                translateY: diagramY,
-              }}
-              className="absolute inset-0 z-30"
-            >
-              <VehicleShowcase scrollProgress={scrollYProgress} />
-            </motion.div> */}
 
           </div>
         </section>

@@ -1,14 +1,14 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, ReactThreeFiber, ThreeElements, useFrame } from "@react-three/fiber";
 import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
 import { useScroll, useMotionValueEvent, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 import VehicleShowcase from "./vehicle-showcase";
-import Image from "next/image";
 
 function Vehicle() {
   const { scene } = useGLTF("/4B2AAPMTY5BZGZG6Z3WSJKS26.glb");
 
-  const vehicleRef = useRef(null);
+  const vehicleRef = useRef<ThreeElements["primitive"]>(null);
   const progress = useRef(0);
 
   const { scrollYProgress } = useScroll();
@@ -54,10 +54,11 @@ function CameraController() {
   useFrame(({ camera }) => {
     const t = progress.current;
 
-    // Start at 20, finish at 8
-    camera.fov = 25 - 10 * t;
+  const perspectiveCamera = camera as THREE.PerspectiveCamera;
 
-    camera.updateProjectionMatrix();
+  // Start at 25, finish at 15
+  perspectiveCamera.fov = 25 - 10 * t;
+  perspectiveCamera.updateProjectionMatrix();
   });
 
   return null;

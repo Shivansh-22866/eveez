@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import { CTA, Metrics, PageShell, SectionHeading } from "@/components/site";
 export default function Impact() {
   return (

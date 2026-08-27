@@ -1,17 +1,29 @@
-import Link from "next/link";
-import { ArrowUpRight, Check } from "lucide-react";
-import { CTA, PageShell, SectionHeading } from "@/components/site";
+import { Check } from "lucide-react";
+import { CTA, Header, SectionHeading } from "@/components/site";
 export default function Franchise() {
   return (
     <>
-      <PageShell
+      <Header dark />
+      {/* <PageShell
         dark
-        label="Franchise with VEHZ"
+        label="Franchise with Eveez"
         title="Own the movement."
         intro="Bring reliable electric mobility to your city, with a proven model and a partner who stays in motion with you."
       >
         <div></div>
-      </PageShell>
+      </PageShell> */}
+
+      <section className="w-full bg-foreground text-primary-foreground">
+        <div className="mx-auto flex min-h-[58vh] max-w-7xl flex-col justify-end px-6 pb-16 pt-36 lg:px-10">
+          <p className="eyebrow text-primary">Franchise with Eveez</p>
+          <h1 className="mt-5 max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
+            Own the movement.
+          </h1>
+          <p className="mt-8 max-w-xl text-lg leading-7 opacity-70">
+            Bring reliable electric mobility to your city, with a proven model and a partner who stays in motion with you.
+          </p>
+        </div>
+      </section>
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <SectionHeading
           eyebrow="Why VEHZ"
