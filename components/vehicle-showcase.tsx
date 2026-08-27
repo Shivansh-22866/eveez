@@ -65,7 +65,7 @@ function VehicleShowcase({
    */
   const progress = useTransform(
     scrollProgress,
-    [0.7, 1],
+    [0.5, 1],
     [0, vehicleCount]
   );
 
