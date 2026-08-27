@@ -1,14 +1,25 @@
-import { CTA, Metrics, PageShell, SectionHeading } from "@/components/site";
+import { CTA, Footer, Header, Metrics, PageShell, SectionHeading } from "@/components/site";
 export default function About() {
   return (
     <>
-      <PageShell
-        label="About VEHZ"
+      <Header/>
+      {/* <PageShell
+        label="About Eveez"
         title="We move people toward possibility."
-        intro="VEHZ began with a simple belief: the right vehicle can change the trajectory of a life. Today, we are building the platform to make that belief accessible at scale."
+        intro="Eveez began with a simple belief: the right vehicle can change the trajectory of a life. Today, we are building the platform to make that belief accessible at scale."
       >
         <div></div>
-      </PageShell>
+      </PageShell> */}
+        <div className="mx-auto flex min-h-[58vh] max-w-7xl flex-col justify-end px-6 pb-16 pt-36 lg:px-10">
+          <p className="eyebrow text-primary">About Eveez</p>
+          <h1 className="mt-5 max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
+            We move people toward possibility.
+          </h1>
+
+          <p className="mt-8 max-w-xl text-lg leading-7 opacity-70">
+            Eveez began with a simple belief: the right vehicle can change the trajectory of a life. Today, we are building the platform to make that belief accessible at scale.
+          </p>
+        </div>
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <SectionHeading eyebrow="Our story" title="From play to purpose." />
         <div className="grid gap-5 md:grid-cols-3">
@@ -56,6 +67,8 @@ export default function About() {
         </div>
       </section>
       <CTA title="Let’s build what’s next." />
+
+      <Footer/>
     </>
   );
 }

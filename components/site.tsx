@@ -28,7 +28,7 @@ export function Header({ dark = false }: { dark?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
     <header
-      className={`absolute inset-x-0 top-0 z-50 ${dark ? "text-primary-foreground" : "text-foreground"}`}
+      className={`sticky bg-primary/40 backdrop-blur-3xl inset-x-0 top-0 z-50 ${dark ? "text-primary-foreground" : "text-foreground"}`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
         <Logo light={dark} />
