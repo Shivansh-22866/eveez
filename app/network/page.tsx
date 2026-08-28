@@ -1,3 +1,5 @@
+"use client"
+
 import { MapPin } from "lucide-react";
 import {
   Footer,
@@ -7,6 +9,8 @@ import {
   PageShell,
   SectionHeading,
 } from "@/components/site";
+import { WorldMap } from "@/components/ui/world-map";
+import { motion } from "framer-motion";
 const cities = [
   "Gurugram",
   "Dehradun",
@@ -50,7 +54,76 @@ export default function Network() {
           ]}
         />
         <div className="mt-16 grid gap-8 lg:grid-cols-[1.1fr_.9fr]">
-          <NetworkVisual />
+          {/* <NetworkVisual /> */}
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="
+              relative
+              w-full
+              max-w-[600px]
+              aspect-[6/1]
+              overflow-clip
+
+              mx-auto
+
+              sm:w-[90%]
+              md:w-[600px]
+            "
+          >
+            <WorldMap
+              lineColor="#FF5634"
+              dots={[
+                {
+                  start: {
+                    lat: 46.4519,
+                    lng: -12.0418,
+                  },
+                  end: {
+                    lat: 41.4519,
+                    lng: -17.9,
+                    label: "Haryana",
+                  },
+                },
+                {
+                  start: {
+                    lat: -44.4834,
+                    lng: -28.3936,
+                  },
+                  end: {
+                    lat: -35.9117,
+                    lng: -2.6433,
+                    label: "Hyderabad",
+                  },
+                },
+                {
+                  end: {
+                    lat: 46.4519,
+                    lng: -12.0418,
+                    label: "Delhi",
+                  },
+                  start: {
+                    lat: -35.9117,
+                    lng: -2.6433,
+                  },
+                },
+                {
+                  start: {
+                    lat: 41.4519,
+                    lng: -17.9,
+                  },
+                  end: {
+                    lat: -44.4834,
+                    lng: -28.3936,
+                    label: "Bangalore",
+                  },
+                },
+              ]}
+            />
+          </motion.div>
           <div className="rounded-2xl bg-card p-8">
             <SectionHeading
               eyebrow="Live footprint"

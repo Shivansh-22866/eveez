@@ -13,11 +13,13 @@ interface MapProps {
     end: { lat: number; lng: number; label?: string };
   }>;
   lineColor?: string;
+  full?: boolean;
 }
 
 export function WorldMap({
   dots = [],
   lineColor = "#0ea5e9",
+  full
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const map = new DottedMap({ height: 100, grid: "diagonal", countries: ['IND', 'PAK', 'NPL'] });
@@ -47,7 +49,7 @@ export function WorldMap({
   };
 
   return (
-    <div className="w-full aspect-[2/1] dark:bg-black bg-white rounded-lg  relative font-sans">
+    <div className={`w-full dark:bg-black bg-white rounded-lg  relative font-sans ${full ? "aspect-[2/1]" : "aspect-auto"}`}>
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
@@ -63,7 +65,7 @@ export function WorldMap({
   return (
     <div
       key={i}
-      className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10px] text-black z-10"
+      className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-[5px] md:text-[10px] lg:text-[10px] text-black z-10"
       style={{
         left: `${(x / 800) * 100}%`,
         top: `${(y / 390) * 100}%`,

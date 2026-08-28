@@ -37,7 +37,7 @@ export default function Impact() {
           <div className="rounded-2xl bg-foreground p-8 text-primary-foreground md:p-12">
             <p className="eyebrow text-primary">A rider’s day</p>
             <p className="mt-20 text-3xl font-bold leading-tight">
-              “With my VEHZ, I spend less on fuel and more time earning.”
+              “With my EVeez, I spend less on fuel and more time earning.”
             </p>
             <p className="mt-8 font-mono text-xs uppercase tracking-widest text-primary-foreground/50">
               — Rajesh / Delivery partner / Gurugram

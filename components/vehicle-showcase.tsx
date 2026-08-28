@@ -100,11 +100,11 @@ function VehicleShowcase({
       </div>
 
       {/* Eyebrow */}
-      <div className="absolute left-6 top-28 z-20 lg:left-10">
+      {/* <div className="absolute left-6 top-28 z-20 lg:left-10">
         <p className="eyebrow text-primary-foreground/60">
           The VEHZ range
         </p>
-      </div>
+      </div> */}
 
       {/* Vehicle slides */}
       <div className="relative z-10 w-full">
@@ -203,7 +203,7 @@ function VehicleSlide({
             {vehicle.type}
           </p>
 
-          <h2 className="text-6xl font-black tracking-[-0.07em] xl:text-5xl">
+          <h2 className="text-3xl font-black tracking-[-0.07em] xl:text-4xl">
             {vehicle.name}
           </h2>
 

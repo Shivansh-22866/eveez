@@ -277,7 +277,7 @@ export default function About() {
           />
         </div>
       </section>
-      <CTA title="Let&quot;s build what&quot;s next." />
+      <CTA title="Let&apos;s build what&apos;s next." />
 
       <Footer/>
     </>
