@@ -1,14 +1,25 @@
-import { CTA, Metrics, PageShell, SectionHeading } from "@/components/site";
+import { CTA, Footer, Header, Metrics, PageShell, SectionHeading } from "@/components/site";
 export default function Impact() {
   return (
     <>
-      <PageShell
+      <Header/>
+      {/* <PageShell
         label="Impact"
         title="Movement creates momentum."
         intro="Mobility is not just about moving people. It enables people to work, earn and access opportunity."
       >
         <div></div>
-      </PageShell>
+      </PageShell> */}
+      <div className="mx-auto flex min-h-[58vh] max-w-7xl flex-col justify-end px-6 pb-16 pt-36 lg:px-10">
+          <p className="eyebrow text-primary">Impact</p>
+          <h1 className="mt-5 max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
+            Movement creates momentum.
+          </h1>
+
+          <p className="mt-8 max-w-xl text-lg leading-7 opacity-70">
+            Mobility is not just about moving people. It enables people to work, earn and access opportunity.
+          </p>
+      </div>
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <SectionHeading
           eyebrow="Measured movement"
@@ -45,6 +56,7 @@ export default function Impact() {
         </div>
       </section>
       <CTA title="Make movement matter." />
+      <Footer/>
     </>
   );
 }

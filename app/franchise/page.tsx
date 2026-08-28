@@ -1,9 +1,9 @@
 import { Check } from "lucide-react";
-import { CTA, Header, SectionHeading } from "@/components/site";
+import { CTA, Footer, Header, SectionHeading } from "@/components/site";
 export default function Franchise() {
   return (
     <>
-      <Header dark />
+      <Header />
       {/* <PageShell
         dark
         label="Franchise with Eveez"
@@ -87,6 +87,7 @@ export default function Franchise() {
         </div>
       </section>
       <CTA title="Ready to own the movement?" />
+      <Footer/>
     </>
   );
 }

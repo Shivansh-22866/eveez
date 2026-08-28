@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Menu, X, MapPin, Mail, Phone } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 export const navItems = [
   ["About", "/about"],
@@ -19,7 +20,8 @@ export function Logo({ light = false }: { light?: boolean }) {
       className={`font-mono text-xl font-black tracking-[-0.12em] ${light ? "text-primary-foreground" : "text-foreground"}`}
       aria-label="VEHZ home"
     >
-      Eveez<span className="text-primary">.</span>
+      {/* Eveez<span className="text-primary">.</span> */}
+      <Image src="https://www.eveez.in/image/evv.png" width={100} height={100} alt="Eveez Logo" />
     </Link>
   );
 }
@@ -28,7 +30,7 @@ export function Header({ dark = false }: { dark?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
     <header
-      className={`sticky bg-primary/40 backdrop-blur-3xl inset-x-0 top-0 z-50 ${dark ? "text-primary-foreground" : "text-foreground"}`}
+      className={`sticky backdrop-blur-3xl inset-x-0 top-0 z-50 ${dark ? "text-black" : "text-foreground"}`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
         <Logo light={dark} />
@@ -40,7 +42,7 @@ export function Header({ dark = false }: { dark?: boolean }) {
             <Link
               key={href}
               href={href}
-              className="text-xs font-bold uppercase tracking-[0.16em] opacity-75 transition hover:text-primary hover:opacity-100"
+              className={`text-xs font-bold uppercase tracking-[0.16em] opacity-75 transition hover:opacity-100 ${dark ? "hover:text-background" : "hover:text-accent"}`}
             >
               {label}
             </Link>

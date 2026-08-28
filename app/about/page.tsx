@@ -157,19 +157,79 @@ export default function About() {
       >
         <div></div>
       </PageShell> */}
-        <div className="mx-auto flex min-h-[58vh] max-w-7xl flex-col justify-end px-6 pb-16 pt-36 lg:px-10">
-          <img src="https://www.eveez.in/image/about-ev.png" className="absolute w-[390px] h-[300px] right-32 top-1/2 -translate-y-1/2" />
-          <p className="eyebrow text-primary">About Eveez</p>
-          <h1 className="mt-5 max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
-            We move people toward possibility.
-          </h1>
+<div className="mx-auto flex min-h-[70vh] w-full max-w-7xl flex-col justify-end px-5 pb-10 pt-24 sm:px-8 sm:pb-14 sm:pt-28 lg:min-h-[58vh] lg:px-10 lg:pb-16 lg:pt-32">
 
-          <p className="mt-8 max-w-xl text-lg leading-7 opacity-70">
-            Eveez began with a simple belief: the right vehicle can change the trajectory of a life. Today, we are building the platform to make that belief accessible at scale.
-            EVeez aims to electrify the Indian mobility sector. We provide eBikes on subscription to businesses who is looking to reduce their carbon footprint.
-            Your next pizza delivery could be pollution free, count on us!
-          </p>
-        </div>
+  <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
+
+    {/* Image */}
+    <div className="order-1 flex w-full justify-center lg:order-2 lg:w-[40%] lg:shrink-0">
+      <img
+        src="https://www.eveez.in/image/about-ev.png"
+        alt="Eveez electric vehicle"
+        className="
+          h-auto
+          w-[240px]
+          object-contain
+
+          sm:w-[300px]
+
+          lg:w-full
+          lg:max-w-[390px]
+        "
+      />
+    </div>
+
+    {/* Content */}
+    <div className="order-2 w-full lg:order-1 lg:max-w-3xl">
+
+      <p className="eyebrow text-primary">
+        About Eveez
+      </p>
+
+      <h1
+        className="
+          mt-4
+          text-balance
+          text-4xl
+          font-black
+          leading-[0.95]
+          tracking-[-0.06em]
+
+          sm:text-6xl
+
+          lg:text-7xl
+          xl:text-8xl
+        "
+      >
+        We move people toward possibility.
+      </h1>
+
+      <p
+        className="
+          mt-6
+          max-w-xl
+          text-base
+          leading-6
+          opacity-70
+
+          sm:mt-8
+          sm:text-lg
+          sm:leading-7
+        "
+      >
+        Eveez began with a simple belief: the right vehicle can change
+        the trajectory of a life. Today, we are building the platform
+        to make that belief accessible at scale. EVeez aims to electrify
+        the Indian mobility sector. We provide eBikes on subscription
+        to businesses who are looking to reduce their carbon footprint.
+        Your next pizza delivery could be pollution free, count on us!
+      </p>
+
+    </div>
+
+  </div>
+</div>
+
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <SectionHeading eyebrow="Our story" title="From play to purpose." />
         <div className="grid gap-5 md:grid-cols-3">
@@ -201,7 +261,7 @@ export default function About() {
         </div>
       </section>
       <Timeline data={timelineData} />
-      <section className="bg-foreground px-6 py-24 text-primary-foreground lg:px-10">
+      <section className="bg-foreground px-6 py-24 text-primary-foreground lg:px-10 z-40 md:z-0 lg:z-0">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="What guides us"

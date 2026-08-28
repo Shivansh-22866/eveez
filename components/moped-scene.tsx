@@ -1,8 +1,20 @@
+"use client";
+
 import * as THREE from "three";
-import { Canvas, ReactThreeFiber, ThreeElements, useFrame } from "@react-three/fiber";
+import {
+  Canvas,
+  ReactThreeFiber,
+  ThreeElements,
+  useFrame,
+} from "@react-three/fiber";
 import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
-import { useScroll, useMotionValueEvent, useTransform, motion } from "framer-motion";
-import { useRef } from "react";
+import {
+  useScroll,
+  useMotionValueEvent,
+  useTransform,
+  motion,
+} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import VehicleShowcase from "./vehicle-showcase";
 
 function Vehicle() {
@@ -27,8 +39,7 @@ function Vehicle() {
     vehicleRef.current.position.z = 3.2 * t;
 
     vehicleRef.current.rotation.x = 0;
-    vehicleRef.current.rotation.y =
-      (45 + 90 * t) * (Math.PI / 180);
+    vehicleRef.current.rotation.y = (45 + 90 * t) * (Math.PI / 180);
     vehicleRef.current.rotation.z = 0;
   });
 
@@ -54,219 +65,319 @@ function CameraController() {
   useFrame(({ camera }) => {
     const t = progress.current;
 
-  const perspectiveCamera = camera as THREE.PerspectiveCamera;
+    const perspectiveCamera = camera as THREE.PerspectiveCamera;
 
-  // Start at 25, finish at 15
-  perspectiveCamera.fov = 25 - 10 * t;
-  perspectiveCamera.updateProjectionMatrix();
+    // Start at 25, finish at 15
+    perspectiveCamera.fov = 25 - 10 * t;
+    perspectiveCamera.updateProjectionMatrix();
   });
 
   return null;
 }
 
 export default function VehicleModel() {
+  const [isMobile, setIsMobile] = useState(false);
 
-  const {scrollYProgress} = useScroll()
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+    const updateScreenSize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    updateScreenSize();
+
+    mediaQuery.addEventListener("change", updateScreenSize);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateScreenSize);
+    };
+  }, []);
+
+  const { scrollYProgress } = useScroll();
 
   const titleOpacity = useTransform(
     scrollYProgress,
     [0, 0.2, 0.6, 1],
     [1, 0, 0, 0],
-    {clamp: true}
-  )
+    { clamp: true },
+  );
 
   const carouselOpacity = useTransform(
     scrollYProgress,
     [0, 0.2, 0.6, 1],
     [0, 1, 1, 1],
-    {clamp: true}
-  )
+    { clamp: true },
+  );
 
-  const logoOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.2, 1],
-    [1, 0, 0],
-    {clamp: true}
-  )
+  const logoOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [1, 0, 0], {
+    clamp: true,
+  });
 
   const features = [
-  {
-    title: "Premium Design",
-    description: "A sleek and aerodynamic exterior",
-    position: { top: "20%", right: "12%" },
-  },
-  {
-    title: "Long Range",
-    description: "Go further on every charge",
-    position: { top: "38%", right: "4%" },
-  },
-  {
-    title: "Smart Technology",
-    description: "Connected features built around you",
-    position: { top: "58%", right: "8%" },
-  },
-  {
-    title: "Fast Charging",
-    description: "Spend less time charging",
-    position: { top: "72%", left: "8%" },
-  },
-  {
-    title: "Advanced Safety",
-    description: "Protection wherever you go",
-    position: { top: "32%", left: "5%" },
-  },
-];
-
+    {
+      title: "Premium Design",
+      description: "A sleek and aerodynamic exterior",
+      position: { top: "20%", right: "12%" },
+    },
+    {
+      title: "Long Range",
+      description: "Go further on every charge",
+      position: { top: "38%", right: "4%" },
+    },
+    {
+      title: "Smart Technology",
+      description: "Connected features built around you",
+      position: { top: "58%", right: "8%" },
+    },
+    {
+      title: "Fast Charging",
+      description: "Spend less time charging",
+      position: { top: "72%", left: "8%" },
+    },
+    {
+      title: "Advanced Safety",
+      description: "Protection wherever you go",
+      position: { top: "32%", left: "5%" },
+    },
+  ];
 
   return (
-    <div
-      style={{
-        height: "1200vh",
-        width: "100%",
-        maxWidth: "100vw",
-        backgroundColor: "#FF5634"
-      }}
-    >
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          width: "100%",
-          height: "100vh",
-        }}
-      >
+    <section className="relative h-[600vh] w-full max-w-[100vw] overflow-x-clip bg-[#FF5634] md:h-[900vh] lg:h-[1200vh] -top-10">
+      <div className="sticky top-0 h-screen min-h-[620px] w-full overflow-hidden">
+        {/* =====================================================
+            3D VEHICLE
+            Only mounted on desktop/tablet.
+            ===================================================== */}
+
+        {!isMobile && (
+          <div className="absolute inset-0 z-[1] h-full w-full">
+            <Canvas
+              className="block h-full w-full"
+              camera={{
+                position: [15, 3, 0],
+                fov: 25,
+              }}
+              dpr={[1, 2]}
+              gl={{
+                antialias: true,
+                alpha: true,
+              }}
+            >
+              <ambientLight intensity={1.5} />
+
+              <directionalLight position={[5, 5, 5]} intensity={3} />
+
+              <Environment preset="studio" />
+
+              <Vehicle />
+
+              <CameraController />
+
+              <OrbitControls
+                enableZoom={false}
+                enablePan={false}
+                enableRotate={true}
+              />
+            </Canvas>
+          </div>
+        )}
+
+        {/* =====================================================
+            TITLE
+            ===================================================== */}
 
         <motion.div
-          
+          className="
+            absolute
+            z-10
+
+            left-1/2
+            top-[12%]
+            w-full
+            -translate-x-1/2
+
+            px-5
+            text-center
+
+            text-white
+
+            md:left-[3%]
+            md:top-1/2
+            md:w-auto
+            md:translate-x-0
+            md:-translate-y-1/2
+            md:px-0
+            md:text-left
+          "
           style={{
-            position: "absolute",
-            zIndex: 10,
-            top: "50%",
-            left: "4%",
-            transform: "translateY(-50%)",
-            pointerEvents: "none",
-            color: "white",
-            fontSize: "clamp(3rem, 7vw, 8rem)",
-            fontWeight: 700,
-            lineHeight: 0.9,
-            letterSpacing: "-0.05em",
-            opacity: titleOpacity
-          }}
-        >
-          <div>Smart</div>
-          <div>Electric</div>
-          <div>Mobility</div>
-        </motion.div>
-
-        <Canvas
-          style={{
-    width: "100%",
-    height: "100%",
-    display: "block",
-  }}
-          camera={{
-            position: [15, 3, 0],
-            fov: 25,
-          }}
-          dpr={[1, 2]}
-        >
-          <ambientLight intensity={1.5} />
-
-          <directionalLight
-            position={[5, 5, 5]}
-            intensity={3}
-          />
-
-          <Environment preset="studio" />
-
-          <Vehicle />
-
-          <CameraController />
-
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            enableRotate={true}
-          />
-        </Canvas>
-
-        <motion.div
-          style={{
-            position: "absolute",
-            zIndex: 20,
-            top: "50%",
-            right: "8%",
-            transform: "translateY(-50%)",
-            pointerEvents: "none",
-            color: "white",
-            opacity: logoOpacity,
-            textAlign: "right",
-            maxWidth: "520px",
+            opacity: titleOpacity,
           }}
         >
           <div
-            style={{
-              fontSize: "clamp(1.5rem, 3vw, 3.5rem)",
-              fontWeight: 700,
-              lineHeight: 1.1,
-              letterSpacing: "-0.05em",
-            }}
+            className="
+              text-[clamp(3.2rem,17vw,5rem)]
+              font-bold
+              leading-[0.82]
+              tracking-[-0.06em]
+
+              md:text-[clamp(3rem,7vw,8rem)]
+              md:leading-[0.9]
+              md:tracking-[-0.05em]
+            "
+          >
+            <div>Smart</div>
+            <div>Electric</div>
+            <div>Mobility</div>
+          </div>
+        </motion.div>
+
+        {/* =====================================================
+            RIGHT CONTENT / MOBILE CTA
+            ===================================================== */}
+
+        <motion.div
+          className="
+            absolute
+            z-20
+
+            bottom-[13%]
+            left-0
+            right-0
+
+            mx-auto
+            w-full
+            max-w-[600px]
+
+            px-5
+
+            text-center
+            text-white
+
+            md:bottom-auto
+            md:left-auto
+            md:right-[4%]
+            md:top-1/2
+            md:w-[42vw]
+            md:max-w-[520px]
+            md:-translate-y-1/2
+            md:px-0
+
+            lg:right-[8%]
+          "
+          style={{
+            opacity: logoOpacity,
+          }}
+        >
+          {/* Main heading */}
+
+          <div
+            className="
+              text-[clamp(1.8rem,9vw,2.7rem)]
+              font-bold
+              leading-[1.05]
+              tracking-[-0.05em]
+
+              md:text-[clamp(1.5rem,3vw,3.5rem)]
+              md:leading-[1.1]
+            "
           >
             <div>Worried about</div>
             <div>Rising Petrol</div>
             <div>Prices?</div>
           </div>
 
+          {/* Subheading */}
+
           <div
-            style={{
-              marginTop: "1.5rem",
-              fontSize: "clamp(1rem, 1.5vw, 1.5rem)",
-              fontWeight: 600,
-              lineHeight: 1.2,
-              letterSpacing: "0.02em",
-              textTransform: "uppercase",
-            }}
+            className="
+              mt-4
+
+              text-[0.85rem]
+              font-semibold
+              uppercase
+              leading-[1.25]
+              tracking-[0.02em]
+
+              md:mt-6
+              md:text-[clamp(1rem,1.5vw,1.5rem)]
+              md:leading-[1.2]
+            "
           >
             Introducing All-Inclusive
             <br />
-            <span style={{ color: "#15110d" }}>eBike Subscriptions</span>
+            <span className="text-[#15110d]">eBike Subscriptions</span>
           </div>
 
-          <div
-            style={{
-              display: "inline-block",
-              marginTop: "2rem",
-              padding: "0.9rem 1.8rem",
-              borderRadius: "999px",
-              background: "#15110d",
-              color: "#fff",
-              fontSize: "clamp(0.9rem, 1.2vw, 1.2rem)",
-              fontWeight: 700,
-              letterSpacing: "0.02em",
-            }}
+          {/* CTA */}
+
+          <a
+            href="#subscriptions"
+            className="
+              pointer-events-auto
+              mt-6
+              inline-flex
+              items-center
+              justify-center
+
+              rounded-full
+              bg-[#15110d]
+
+              px-6
+              py-3
+
+              text-[0.9rem]
+              font-bold
+              tracking-[0.02em]
+              text-white
+
+              no-underline
+
+              transition-all
+              duration-300
+
+              hover:-translate-y-1
+              hover:bg-black
+
+              md:mt-8
+              md:px-7
+              md:py-3.5
+              md:text-[clamp(0.9rem,1.2vw,1.2rem)]
+            "
           >
             Start Saving Now →
-          </div>
+          </a>
         </motion.div>
 
+        {/* =====================================================
+            DESKTOP VEHICLE SHOWCASE / CAROUSEL
 
+            Completely removed on mobile.
+            ===================================================== */}
+
+        {!isMobile && (
           <motion.div
-          style={{
-            position: "absolute",
-            zIndex: 20,
-            top: 0,
-            right: 0,
-            width: "60%",
-            height: "100%",
-            pointerEvents: "auto",
-            opacity: carouselOpacity
-          }}
-        >
-          <VehicleShowcase
-            scrollProgress={scrollYProgress}
-          />
-        </motion.div>
+            className="
+              absolute
+              right-0
+              top-0
+              z-20
+
+              h-full
+              w-[65%]
+
+              pointer-events-auto
+
+              lg:w-[60%]
+            "
+            style={{
+              opacity: carouselOpacity,
+            }}
+          >
+            <VehicleShowcase scrollProgress={scrollYProgress} />
+          </motion.div>
+        )}
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,5 +1,7 @@
 import { MapPin } from "lucide-react";
 import {
+  Footer,
+  Header,
   Metrics,
   NetworkVisual,
   PageShell,
@@ -20,13 +22,24 @@ const cities = [
 export default function Network() {
   return (
     <>
-      <PageShell
+      <Header/>
+      {/* <PageShell
         label="Our network"
         title="Where opportunity connects."
         intro="Our footprint is more than a map. It is a living network of hubs, vehicles and people making electric work possible."
       >
         <div></div>
-      </PageShell>
+      </PageShell> */}
+      <div className="mx-auto flex min-h-[58vh] max-w-7xl flex-col justify-end px-6 pb-16 pt-36 lg:px-10">
+          <p className="eyebrow text-primary">Where opportunity connects.</p>
+          <h1 className="mt-5 max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
+            We move people toward possibility.
+          </h1>
+
+          <p className="mt-8 max-w-xl text-lg leading-7 opacity-70">
+            Our footprint is more than a map. It is a living network of hubs, vehicles and people making electric work possible.
+          </p>
+      </div>
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <Metrics
           items={[
@@ -60,6 +73,8 @@ export default function Network() {
           </div>
         </div>
       </section>
+
+      <Footer/>
     </>
   );
 }
